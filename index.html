@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Feedback System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #4facfe, #00f2fe);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    .card {
+      background: #fff;
+      padding: 25px;
+      margin: 20px 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    h2 {
+      margin-bottom: 15px;
+      color: #0077b6;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    input, textarea, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #0077b6;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #00b4d8;
+    }
+    .feedback-list {
+      margin-top: 20px;
+    }
+    .feedback-item {
+      background: #f1f1f1;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .feedback-item strong {
+      color: #0077b6;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🎓 Student Feedback System</h1>
+    <p>A simple web app to collect and display student feedback</p>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h2>Submit Feedback</h2>
+      <form id="feedbackForm">
+        <label for="name">Student Name:</label>
+        <input type="text" id="name" required>
+
+        <label for="course">Course:</label>
+        <select id="course" required>
+          <option value="">--Select Course--</option>
+          <option>Web Development</option>
+          <option>Data Science</option>
+          <option>Machine Learning</option>
+          <option>Cyber Security</option>
+        </select>
+
+        <label for="feedback">Feedback:</label>
+        <textarea id="feedback" rows="4" required></textarea>
+
+        <button type="submit">Submit Feedback</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Feedback Received</h2>
+      <div id="feedbackList" class="feedback-list">
+        <p>No feedback yet...</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("feedbackForm");
+    const feedbackList = document.getElementById("feedbackList");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const course = document.getElementById("course").value;
+      const feedback = document.getElementById("feedback").value;
+
+      
+      const feedbackItem = document.createElement("div");
+      feedbackItem.classList.add("feedback-item");
+      feedbackItem.innerHTML = `<strong>${name}</strong> (${course})<br>${feedback}`;
+
+      
+      if (feedbackList.querySelector("p")) {
+        feedbackList.innerHTML = ""; 
+      }
+      feedbackList.appendChild(feedbackItem);
+
+      
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
